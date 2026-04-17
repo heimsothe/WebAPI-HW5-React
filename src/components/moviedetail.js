@@ -60,7 +60,7 @@ const MovieDetail = () => {
           </ListGroupItem>
           <ListGroupItem>
             <h4>
-              {selectedMovie.avgRating?.toFixed(1) ?? '-'} <BsStarFill className="text-warning" />
+              {selectedMovie.avgRating?.toFixed(1) ?? '-'}/5 <BsStarFill className="text-warning" />
             </h4>
           </ListGroupItem>
         </ListGroup>
