@@ -44,8 +44,8 @@ const MovieDetail = () => {
     }
 
     return (
-      <Card className="bg-dark text-dark p-4 rounded">
-        <Card.Header>Movie Detail</Card.Header>
+      <Card className="bg-dark p-4 rounded">
+        <Card.Header className="text-light">Movie Detail</Card.Header>
         <Card.Body>
           <Image className="image" src={selectedMovie.imageUrl} thumbnail />
         </Card.Body>
