@@ -50,7 +50,7 @@ const MovieDetail = () => {
           <Image className="image" src={selectedMovie.imageUrl} thumbnail />
         </Card.Body>
         <ListGroup>
-          <ListGroupItem>{selectedMovie.title}</ListGroupItem>
+          <ListGroupItem>{selectedMovie.title} ({selectedMovie.releaseDate})</ListGroupItem>
           <ListGroupItem>
             {selectedMovie.actors.map((actor, i) => (
               <p key={i}>
