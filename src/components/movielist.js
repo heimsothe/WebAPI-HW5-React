@@ -45,7 +45,7 @@ function MovieList() {
               </Nav.Link>
               <Carousel.Caption>
                 <h3>{movie.title}</h3>
-                <BsStarFill /> {movie.avgRating?.toFixed(1) ?? '-'} &nbsp;&nbsp; {movie.releaseDate}
+                {movie.avgRating?.toFixed(1) ?? '-'} <BsStarFill className="text-warning" /> &nbsp;&nbsp; {movie.releaseDate}
               </Carousel.Caption>
             </Carousel.Item>
           ))}

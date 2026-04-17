@@ -60,15 +60,15 @@ const MovieDetail = () => {
           </ListGroupItem>
           <ListGroupItem>
             <h4>
-              <BsStarFill /> {selectedMovie.avgRating?.toFixed(1) ?? '-'}
+              {selectedMovie.avgRating?.toFixed(1) ?? '-'} <BsStarFill className="text-warning" />
             </h4>
           </ListGroupItem>
         </ListGroup>
         <Card.Body className="card-body bg-white">
           {selectedMovie.reviews?.map((review, i) => (
             <p key={i}>
-              <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
-              {review.rating}
+              <b>{review.username}</b>&nbsp; {review.review} &nbsp; {review.rating}{' '}
+              <BsStarFill className="text-warning" />
             </p>
           ))}
         </Card.Body>
