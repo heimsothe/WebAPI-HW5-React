@@ -27,8 +27,8 @@ function MovieList() {
         dispatch(setMovie(movie));
     };
 
-    if (!memoizedMovies) { // Use memoizedMovies here
-        return <div>Loading....</div>;
+    if (!memoizedMovies || memoizedMovies.length === 0) {
+        return <div>No movies available. Please sign in or check back later.</div>;
     }
 
     return (
@@ -45,7 +45,7 @@ function MovieList() {
               </Nav.Link>
               <Carousel.Caption>
                 <h3>{movie.title}</h3>
-                <BsStarFill /> {movie.avgRating} &nbsp;&nbsp; {movie.releaseDate}
+                <BsStarFill /> {movie.avgRating?.toFixed(1) ?? '-'} &nbsp;&nbsp; {movie.releaseDate}
               </Carousel.Caption>
             </Carousel.Item>
           ))}
