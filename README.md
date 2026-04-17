@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# WebAPI Assignment 5 React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Author:** Elijah Heimsoth
+**Class:** CSCI 3916 Web API
+**Date:** 04/17/26
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+Single Page Application that consumes the HW5 Movies + Reviews API. Users sign up, log in, browse a carousel of movies sorted by aggregated rating, view a movie detail page with poster image, cast, avg rating, and reviews, and submit new reviews inline. Bootstrapped with Create React App and built on the HW3 React starter.
 
-### `npm start`
+New in HW5:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Poster images** - movies now render with an `imageUrl` from the API.
+- **Aggregated `avgRating`** - displayed in the movie list and detail views, formatted to one decimal.
+- **Inline review submission** - new `ReviewForm` component on the movie detail page. Dispatches a thunk that POSTs to `/reviews` and re-fetches the movie on success so the reviews grid and `avgRating` update automatically.
+- **Defensive rendering** - carousel handles empty movie state without crashing; detail page is null-safe against the window between `SET_MOVIE` and the detail fetch completing.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**API companion repo:** [WebAPI-HW5](https://github.com/heimsothe/WebAPI-HW5)
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/heimsothe/WebAPI-HW5-React.git
+cd WebAPI-HW5-React
+yarn install
+```
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Start the dev server:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+yarn start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Build for production:
 
-### `npm run eject`
+```bash
+yarn build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The dev server runs at [http://localhost:3000](http://localhost:3000). The companion API must be running at the URL in `.env.development` (defaults to `http://localhost:8080`).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Environment Variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Variable            | Loaded by          | Default / Production Value                        |
+| ------------------- | ------------------ | ------------------------------------------------- |
+| `REACT_APP_API_URL` | `yarn start` (dev) | `http://localhost:8080` (from `.env.development`) |
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployed URLs
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **React App:** [https://webapi-hw5-react-heimsoth.onrender.com](https://webapi-hw5-react-heimsoth.onrender.com)
+- **API:** [https://webapi-hw5-heimsoth.onrender.com](https://webapi-hw5-heimsoth.onrender.com)
 
-### Code Splitting
+## Component Overview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+| Component                  | Responsibility                                                             |
+| -------------------------- | -------------------------------------------------------------------------- |
+| `authentication.js`        | HOC wrapping sign-in / register flow                                       |
+| `login.js` / `register.js` | Auth forms that dispatch `submitLogin` / `submitRegistration` thunks       |
+| `movieheader.js`           | Top nav bar - Movie List / Movie Detail / Logout links                     |
+| `movielist.js`             | Carousel of movies sorted by `avgRating`; empty-state fallback             |
+| `movie.js`                 | Route wrapper that extracts `movieId` and renders `MovieDetail`            |
+| `moviedetail.js`           | Poster, title (year), actors, avg rating, reviews grid, and `<ReviewForm>` |
+| `reviewForm.js` (new)      | Inline controlled form; dispatches `submitReview` thunk                    |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Redux Layer
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+| File                       | Responsibility                                                            |
+| -------------------------- | ------------------------------------------------------------------------- |
+| `actions/authActions.js`   | `submitLogin`, `submitRegistration`, `logout` - store JWT in localStorage |
+| `actions/movieActions.js`  | `fetchMovies`, `fetchMovie`, `setMovie`, `submitReview` - all JWT-authed  |
+| `reducers/authReducer.js`  | Tracks `isAuthenticated` flag                                             |
+| `reducers/movieReducer.js` | Tracks `movies` list and `selectedMovie`                                  |
+| `stores/store.js`          | Redux Toolkit store with thunk + logger middleware                        |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
