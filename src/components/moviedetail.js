@@ -1,9 +1,22 @@
+/*
+- File: moviedetail.js
+- Author: Elijah Heimsoth
+- Date: 04/17/2026
+- Assignment: WebAPI-HW5
+- Class: CSCI 3916
+
+Description: Movie detail screen. Shows movie image, title, actors,
+aggregated average rating, reviews grid, and the ReviewForm component
+for submitting new reviews.
+ */
+
 import React, { useEffect } from 'react';
 import { fetchMovie } from '../actions/movieActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, ListGroup, ListGroupItem, Image } from 'react-bootstrap';
 import { BsStarFill } from 'react-icons/bs';
 import { useParams } from 'react-router-dom'; // Import useParams
+import ReviewForm from './reviewForm';
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
@@ -47,18 +60,19 @@ const MovieDetail = () => {
           </ListGroupItem>
           <ListGroupItem>
             <h4>
-              <BsStarFill /> {selectedMovie.avgRating}
+              <BsStarFill /> {selectedMovie.avgRating?.toFixed(1) ?? '-'}
             </h4>
           </ListGroupItem>
         </ListGroup>
         <Card.Body className="card-body bg-white">
-          {selectedMovie.reviews.map((review, i) => (
+          {selectedMovie.reviews?.map((review, i) => (
             <p key={i}>
               <b>{review.username}</b>&nbsp; {review.review} &nbsp; <BsStarFill />{' '}
               {review.rating}
             </p>
           ))}
         </Card.Body>
+        <ReviewForm movieId={movieId} />
       </Card>
     );
   };
