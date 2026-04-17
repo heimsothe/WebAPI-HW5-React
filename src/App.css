@@ -78,7 +78,8 @@
 }
 
 .image {
-  height: 800px;      /* Set a consistent height */
+  max-height: 85vh;   /* Scale to viewport so the poster always fits without scrolling */
+  height: auto;       /* Let height follow intrinsic aspect ratio */
   width: auto;        /* Width adjusts to maintain aspect ratio */
   object-fit: contain; /* Ensures the image scales to fit without cropping */
 }
