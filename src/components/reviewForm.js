@@ -46,7 +46,7 @@ function ReviewForm({ movieId }) {
                 {error && <Alert variant="danger">{error}</Alert>}
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Rating</Form.Label>
+                        <Form.Label className="mr-2">Rating</Form.Label>
                         <Form.Select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
                             {[5, 4, 3, 2, 1].map((n) => (
                                 <option key={n} value={n}>{n}</option>
