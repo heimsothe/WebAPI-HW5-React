@@ -84,6 +84,13 @@
   object-fit: contain; /* Ensures the image scales to fit without cropping */
 }
 
+.image-detail {
+  max-height: 40vh;   /* Smaller poster on the detail page so list items and reviews are visible without scrolling */
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

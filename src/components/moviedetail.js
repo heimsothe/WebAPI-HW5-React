@@ -47,7 +47,7 @@ const MovieDetail = () => {
       <Card className="bg-dark p-4 rounded">
         <Card.Header className="text-light">Movie Detail</Card.Header>
         <Card.Body>
-          <Image className="image" src={selectedMovie.imageUrl} thumbnail />
+          <Image className="image-detail" src={selectedMovie.imageUrl} thumbnail />
         </Card.Body>
         <ListGroup>
           <ListGroupItem>{selectedMovie.title} ({selectedMovie.releaseDate})</ListGroupItem>
